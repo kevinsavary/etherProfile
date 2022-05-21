@@ -1,5 +1,5 @@
-var ChainList = artifacts.require("./ChainMail.sol");
+var etherProfile = artifacts.require("./etherProfile.sol");
 
 module.exports = function(deployer){
-  deployer.deploy(ChainList);
+  deployer.deploy(etherProfile);
 }

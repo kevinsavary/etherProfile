@@ -4,12 +4,13 @@ App = {
     account: 0x0,
     loading: false,
   
-    init: function() {
+    init: async () =>  {
       return App.initWeb3();
     },
 
-    initWeb3: function() {
+    initWeb3: async () =>  {
         // initialize web3
+        
         if(typeof web3 !== 'undefined') {
           //reuse the provider of the Web3 object injected by Metamask
           App.web3Provider = web3.currentProvider;
@@ -21,10 +22,15 @@ App = {
     
         App.displayAccountInfo();
     
-        //return App.initContract();
+        App.initContract();
+
+        //console.log(App.contracts);
+
+
+
       },
 
-      displayAccountInfo: function() {
+      displayAccountInfo: async () =>  {
         web3.eth.getCoinbase(function(err, account) {
           if(err === null) {
             App.account = account;
@@ -38,8 +44,22 @@ App = {
         });
       },
 
+      initContract: async () => {
+        return $.getJSON('/build/contracts/etherProfile.json', etherProfileArtifact => {
+          App.contracts.etherProfile = TruffleContract(etherProfileArtifact);
+          App.contracts.etherProfile.setProvider(web3.currentProvider);
+          
+          App.contractMessage();
+          
+          })
+        
+    },
 
-
+    contractMessage: async () => {
+      const etherProfileInstance = await App.contracts.etherProfile.deployed();
+      var mess = await etherProfileInstance.getMessage();
+      $('#mess').text(mess);
+    },
 
 
 }

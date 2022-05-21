@@ -2,7 +2,5 @@ truffle migrate --compile-all --reset --network ganache
 truffle console --network  ganache
 web3.eth.accounts
 
-chainMail.deployed().then(function(instance){chainMailInstance = instance;})
-
-chainMail.deployed().then(function(instance) {chainMailApp = instance;})
-chainMailApp.getMessage()
+etherProfile.deployed().then(function(instance){etherProfileInstance = instance;})
+etherProfileInstance.getMessage()
