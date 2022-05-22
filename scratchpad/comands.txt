@@ -3,4 +3,5 @@ truffle console --network  ganache
 web3.eth.accounts
 
 etherProfile.deployed().then(function(instance){etherProfileInstance = instance;})
+etherProfileInstance.addProfile("kevin","someurl")
 etherProfileInstance.getMessage()

@@ -58,7 +58,12 @@ App = {
     contractMessage: async () => {
       const etherProfileInstance = await App.contracts.etherProfile.deployed();
       var mess = await etherProfileInstance.getMessage();
-      $('#mess').text(mess);
+      // to test front end
+      //const receipt = await etherProfileInstance.addProfile("test@gmail.com","someURL");
+      const profile1 =  await etherProfileInstance.profiles(1);
+      const email1 = profile1[2];
+      console.log(email1)
+      $('#mess').text(email1);
     },
 
 
